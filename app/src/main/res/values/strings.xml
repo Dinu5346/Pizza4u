@@ -4,6 +4,8 @@
     <string name="app_icon_description">Pizza4uIcon</string>
     <string name="button_sign_in">Sign In</string>
     <string name="button_sign_up">Sign up</string>
+    <string name="button_sign_up_customer">Sign up - Customer</string>
+    <string name="button_sign_up_manager">Sign up - Manager</string>
     <string name="text_recover_password">Forgot your password?</string>
     <string name="button_recover_password">Recover password</string>
     <string name="text_copyright">©Pizza4u 2022 - All Rights Reserved</string>

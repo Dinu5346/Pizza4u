@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -22,7 +23,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         bottomNav = findViewById(R.id.bottom_navigation);
-        bottomNav.setOnNavigationItemSelectedListener(navListener);
+        bottomNav.setOnItemSelectedListener(navListener);
 
         branchId = findViewById(R.id.editTextBranchId);
         employeeId = findViewById(R.id.editTextEmployeeId);
@@ -31,7 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CustomerFragment()).commit();
     }
 
-    private final BottomNavigationView.OnNavigationItemSelectedListener navListener = item -> {
+    private final NavigationBarView.OnItemSelectedListener navListener = item -> {
         Fragment selectedFragment = null;
         int itemId = item.getItemId();
         if (itemId == R.id.menuItemCustomer) {
