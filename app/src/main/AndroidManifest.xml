@@ -10,7 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pizza4u">
         <activity
-            android:name=".CusRegActivity"
+
+            android:name=".CusRegActivity"/>
+
+            android:name=".SignInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpActivity"
+
             android:exported="false" />
         <activity
             android:name=".MainActivity"
