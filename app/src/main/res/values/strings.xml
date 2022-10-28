@@ -1,11 +1,27 @@
 <resources>
     <string name="app_name">Pizza4u</string>
-    <string name="app_title">Pizza4u</string>
-    <string name="app_icon_description">Pizza4uIcon</string>
-    <string name="button_sign_in">Sign In</string>
-    <string name="button_sign_up">Sign up</string>
-    <string name="text_recover_password">Forgot your password?</string>
-    <string name="button_recover_password">Recover password</string>
-    <string name="text_copyright">©Pizza4u 2022 - All Rights Reserved</string>
-    <string name="text_app_version">Version 1.0</string>
+    <string name="customer_registration">Customer Registration</string>
+    <string name="gfjhfj">gfjhfj</string>
+    <string name="customer_name">Customer Name</string>
+    <string name="customer_id">Customer ID</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="customername">Customer Name</string>
+    <string name="email">Email</string>
+    <string name="employee_registration">Employee Registration</string>
+    <string name="app_title">Pizza4U</string>
+    <string name="app_icon_description">app_icon_description</string>
+    <string name="button_sign_in">button_sign_in</string>
+    <string name="button_sign_up">button_sign_up</string>
+    <string name="text_copyright">text_copyright</string>
+    <string name="text_app_version">text_app_version</string>
+    <string name="employee_registation">Employee Registation</string>
+    <string name="employee_id">Employee ID</string>
+    <string name="employee_name">Employee Name</string>
+    <string name="number">Number</string>
+    <string name="emailll">Email</string>
+    <string name="psssword">Password</string>
+    <string name="save">Save</string>
+    <string name="exit">Exit</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
