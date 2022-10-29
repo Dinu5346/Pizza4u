@@ -16,7 +16,7 @@
             android:name=".SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".Add_Branch"
+            android:name=".AddBranchActivity"
             android:exported="false" />
         <activity
             android:name=".ManagerMainActivity"
