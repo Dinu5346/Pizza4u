@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pizza4u">
         <activity
-            android:name=".CusRegActivity"
+            android:name=".EmployeeRegActivity"
             android:exported="false" />
         <activity
             android:name=".SignInActivity"
