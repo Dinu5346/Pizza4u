@@ -1,11 +1,9 @@
 <resources>
     <string name="app_name">Pizza4u</string>
     <string name="customer_registration">Customer Registration</string>
-    <string name="gfjhfj">gfjhfj</string>
     <string name="customer_name">Customer Name</string>
     <string name="customer_id">Customer ID</string>
     <string name="phone_number">Phone Number</string>
-    <string name="customername">Customer Name</string>
     <string name="email">Email</string>
     <string name="employee_registration">Employee Registration</string>
 
@@ -58,5 +56,4 @@
     <string name="menu_title_manager">Manager</string>
     <string name="button_create_account">Create account</string>
     <string name="button_cancel">Cancel</string>
-
 </resources>
