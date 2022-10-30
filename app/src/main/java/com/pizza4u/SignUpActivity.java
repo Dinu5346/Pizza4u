@@ -33,12 +33,6 @@ public class SignUpActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CustomerFragment()).commit();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-    }
-
     private final NavigationBarView.OnItemSelectedListener navListener = item -> {
         Fragment selectedFragment = null;
         int itemId = item.getItemId();
