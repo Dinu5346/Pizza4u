@@ -30,7 +30,7 @@ public class SignUpActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.CAMERA}, 0);
         }
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CustomerFragment()).commit();
+        getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragment_container, new CustomerFragment()).commit();
     }
 
     private final NavigationBarView.OnItemSelectedListener navListener = item -> {
