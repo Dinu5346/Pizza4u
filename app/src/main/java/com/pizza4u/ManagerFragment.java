@@ -37,6 +37,8 @@ public class ManagerFragment extends Fragment {
     Button buttonCreateAccountManager;
     Button buttonCancelManager;
 
+    Uri selectedImage;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -157,6 +159,13 @@ public class ManagerFragment extends Fragment {
                         .setNegativeButton("Camera", dialogClickListener).setNeutralButton("Cancel",dialogClickListener).show();
             }
         });
+
+        buttonCreateAccountManager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
@@ -164,15 +173,13 @@ public class ManagerFragment extends Fragment {
         switch(requestCode) {
             case 0:
                 if(resultCode == RESULT_OK){
-                    Uri selectedImage = imageReturnedIntent.getData();
-
+                    selectedImage = imageReturnedIntent.getData();
                 }
 
                 break;
             case 1:
                 if(resultCode == RESULT_OK){
-                    Uri selectedImage = imageReturnedIntent.getData();
-
+                    selectedImage = imageReturnedIntent.getData();
                 }
                 break;
         }
