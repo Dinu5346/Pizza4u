@@ -4,15 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
-<<<<<<< HEAD
-    tools:context=".manager">
-=======
     tools:context=".ManagerMainActivity">
->>>>>>> main
-=======
-    tools:context=".ManagerMainActivity">
->>>>>>> b66f58524469b6edafc6f3fb2822763b5948485f
+
+
+
 
     <TextView
         android:id="@+id/textManager"
