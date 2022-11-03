@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pizza4u">
         <activity
+<<<<<<< HEAD
 
 
 ======
@@ -17,16 +18,18 @@
             android:exported="false" />
         <activity
 >>>>>>> main
+=======
+>>>>>>> b66f58524469b6edafc6f3fb2822763b5948485f
             android:name=".SignInActivity"
             android:exported="false" />
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
         <activity
-
-            android:name=".Add_Branch"
+            android:name=".AddBranchActivity"
             android:exported="false" />
         <activity
+<<<<<<< HEAD
             android:name=".manager"/>
 =======
             android:name=".AddBranchActivity"
@@ -35,6 +38,10 @@
             android:name=".ManagerMainActivity"
             android:exported="false" />
 >>>>>>> main
+=======
+            android:name=".ManagerMainActivity"
+            android:exported="false" />
+>>>>>>> b66f58524469b6edafc6f3fb2822763b5948485f
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -7,10 +7,14 @@
     android:background="@android:color/holo_orange_light"
     android:visibility="visible"
 <<<<<<< HEAD
+<<<<<<< HEAD
     tools:context=".Add_Branch">
 =======
     tools:context=".AddBranchActivity">
 >>>>>>> main
+=======
+    tools:context=".AddBranchActivity">
+>>>>>>> b66f58524469b6edafc6f3fb2822763b5948485f
 
     <TextView
         android:id="@+id/textBranchRegistration"

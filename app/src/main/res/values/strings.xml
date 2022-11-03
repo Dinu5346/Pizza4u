@@ -40,10 +40,13 @@
     <string name="email">Email</string>
     <string name="passward">Passward</string>
 
+<<<<<<< HEAD
 
 
 =======
 >>>>>>> main
+=======
+>>>>>>> b66f58524469b6edafc6f3fb2822763b5948485f
     <string name="text_view_cushome_description">Let\'s start your order now!</string>
     <string name="text_pizza_type">Non-Veg Pizza</string>
     <string name="item_home">Home</string>
@@ -72,5 +75,4 @@
     <string name="menu_title_manager">Manager</string>
     <string name="button_create_account">Create account</string>
     <string name="button_cancel">Cancel</string>
-
 </resources>
