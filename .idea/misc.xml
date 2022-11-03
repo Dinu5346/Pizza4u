@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/GitHub/Pizza4u/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2265" />
+        <entry key="..\:/GitHub/Pizza4u/app/src/main/res/layout/activity_add_branch.xml" value="0.1" />
         <entry key="..\:/GitHub/Pizza4u/app/src/main/res/layout/activity_add_employee.xml" value="0.2" />
+        <entry key="..\:/GitHub/Pizza4u/app/src/main/res/layout/activity_customer_main.xml" value="0.1526268115942029" />
+        <entry key="..\:/GitHub/Pizza4u/app/src/main/res/layout/activity_employee_reg.xml" value="0.1" />
         <entry key="..\:/GitHub/Pizza4u/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
         <entry key="..\:/GitHub/Pizza4u/app/src/main/res/layout/activity_manager.xml" value="0.25" />
         <entry key="..\:/Projects/Github/Pizza4u/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />

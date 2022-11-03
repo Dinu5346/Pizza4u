@@ -11,6 +11,12 @@
         android:theme="@style/Theme.Pizza4u">
         <activity
 
+
+======
+            android:name=".EmployeeRegActivity"
+            android:exported="false" />
+        <activity
+>>>>>>> main
             android:name=".SignInActivity"
             android:exported="false" />
         <activity
@@ -22,12 +28,18 @@
             android:exported="false" />
         <activity
             android:name=".manager"/>
+=======
+            android:name=".AddBranchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManagerMainActivity"
+            android:exported="false" />
+>>>>>>> main
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
