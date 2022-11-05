@@ -23,7 +23,7 @@ public class CusHomeFragment extends Fragment {
 
     private View view;
     private RecyclerView recyclerView;
-    private ArrayList pizzaType,ptPhoto;
+    private ArrayList pizzaType, ptPhoto;
     private PizzaTypeRecycleAdapter pizzaTypeRecycleAdapter;
     //private DatabaseHelper newDB;
 
@@ -60,15 +60,14 @@ public class CusHomeFragment extends Fragment {
 
         displayData();
 
-        pizzaTypeRecycleAdapter = new PizzaTypeRecycleAdapter(getContext(),pizzaType,ptPhoto);
+        pizzaTypeRecycleAdapter = new PizzaTypeRecycleAdapter(getContext(), pizzaType, ptPhoto);
         recyclerView.setAdapter(pizzaTypeRecycleAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
     }        //if (cursor.getCount() == 0) {
 
 
-
-    private void displayData (){
+    private void displayData() {
         //Cursor cursor = newDB.displayNotes(Integer.valueOf(MainActivity.id.get(0)));
 //            imgNoNotes.setVisibility(View.VISIBLE);
 //            txtNoNotes.setVisibility(View.VISIBLE);
@@ -82,15 +81,12 @@ public class CusHomeFragment extends Fragment {
 //            }
     }
 
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_cus_home, container, false);
-        return view;
-    }
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        // Inflate the layout for this fragment
+//        view = inflater.inflate(R.layout.fragment_cus_home, container, false);
+//        return view;
+//    }
 
 }
