@@ -10,6 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pizza4u">
         <activity
+            android:name=".SignInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".CusOrderActivity"
             android:exported="false">
             <meta-data
@@ -40,18 +53,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
