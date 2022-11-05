@@ -91,13 +91,23 @@
                 android:textColor="?android:attr/textColorTertiary"
                 app:rippleColor="?android:attr/colorActivatedHighlight" />
 
+            <ImageView
+                android:id="@+id/profilepicManager"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/customer_icon" />
+
             <Button
                 android:id="@+id/buttonCreateAccountCustomer"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="@string/button_create_account"
+                android:textColor="@color/colorOnPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
