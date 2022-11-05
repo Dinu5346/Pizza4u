@@ -1,20 +1,52 @@
 <resources>
     <string name="app_name">Pizza4u</string>
+    <string name="customer_registration">Customer Registration</string>
+    <string name="customer_name">Customer Name</string>
+    <string name="customer_id">Customer ID</string>
+    <string name="phone_number">Phone Number</string>
+
+    <string name="employee_registation">Employee Registation</string>
+    <string name="employee_name">Employee Name</string>
+    <string name="number">Number</string>
+    <string name="emailll">Email</string>
+    <string name="psssword">Password</string>
+    <string name="save">Save</string>
+    <string name="exit">Exit</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+
     <string name="app_title">Pizza4u</string>
     <string name="app_icon_description">Pizza4uIcon</string>
     <string name="button_sign_in">Sign In</string>
     <string name="button_sign_up">Sign up</string>
+    <string name="text_sign_up_manager">Sign up - Manager</string>
+    <string name="text_sign_up_customer">Sign up - Customer</string>
     <string name="text_recover_password">Forgot your password?</string>
     <string name="button_recover_password">Recover password</string>
     <string name="text_copyright">©Pizza4u 2022 - All Rights Reserved</string>
     <string name="text_app_version">Version 1.0</string>
+
+    <string name="manager">Manager</string>
+    <string name="managericon">managerIcon</string>
+    <string name="add_customer">Add Customer</string>
+    <string name="add_employee">Add Employee</string>
+    <string name="add_menu">Add Menu</string>
+    <string name="employee_id">Employee Id</string>
+    <string name="first_name">First Name</string>
+    <string name="branch_id">Branch Id</string>
+    <string name="last_name">Last Name</string>
+    <string name="employee_registration">Employee Registration</string>
+    <string name="phone">phone</string>
+    <string name="email">Email</string>
+    <string name="passward">Passward</string>
+
     <string name="text_view_cushome_description">Let\'s start your order now!</string>
     <string name="text_pizza_type">Non-Veg Pizza</string>
     <string name="item_home">Home</string>
     <string name="item_cart">Cart</string>
     <string name="item_orders">Orders</string>
     <string name="item_profile">Profile</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="pizza_type_view">Non-Veg Pizza</string>
     <string name="cus_profile_heading">My Profile</string>
@@ -24,6 +56,7 @@
     <string name="location">Location</string>
     <string name="text_pizza">BBQ Chicken</string>
     <string name="pizza_description">Pepped Texas BBQ Chicken, Mango BBQ Source, Herb Tomato blend, 100% real mozzarella</string>
+
     <string name="txt_plist_type">Non-Veg Pizza</string>
     <string name="text_pizza_nameCart">BBQ Chicken</string>
     <string name="orderID">Order 1</string>
@@ -31,6 +64,7 @@
     <string name="totPrice">4500</string>
     <string name="chnge_loction">Change Location</string>
     <string name="txt_pricetotcart">Rs. </string>
+
     <string name="text_sign_up_title">Sign Up</string>
     <string name="edit_text_first_name">First Name</string>
     <string name="edit_text_last_name">Last Name</string>

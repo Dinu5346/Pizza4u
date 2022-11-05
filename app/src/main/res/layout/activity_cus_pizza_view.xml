@@ -104,5 +104,4 @@
         app:layout_constraintTop_toBottomOf="@+id/spinner_p_size"
         tools:text="Add To Cart" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>

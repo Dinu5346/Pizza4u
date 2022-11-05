@@ -2,6 +2,7 @@ package com.pizza4u;
 
 import android.os.Bundle;
 
+import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -25,11 +26,17 @@ public class CusCartFragment extends Fragment {
     private Button btnOrder;
     //private DatabaseHelper newDB;
 
+public class CusCartFragment extends Fragment {
+
     public CusCartFragment() {
         // Required empty public constructor
     }
 
    public static CusCartFragment newInstance(String param1, String param2) {
+        CusCartFragment fragment = new CusCartFragment();
+        Bundle args = new Bundle();
+
+public static CusCartFragment newInstance(String param1, String param2) {
         CusCartFragment fragment = new CusCartFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -44,7 +51,7 @@ public class CusCartFragment extends Fragment {
         }
     }
 
-
+ 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

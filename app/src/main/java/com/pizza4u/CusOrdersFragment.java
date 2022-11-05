@@ -1,5 +1,6 @@
 package com.pizza4u;
 
+import androidx.fragment.app.Fragment;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -30,10 +31,10 @@ public class CusOrdersFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     public static CusOrdersFragment newInstance(String param1, String param2) {
         CusOrdersFragment fragment = new CusOrdersFragment();
         Bundle args = new Bundle();
+    
         fragment.setArguments(args);
         return fragment;
     }
@@ -86,4 +87,6 @@ public class CusOrdersFragment extends Fragment {
 //            txtNoNotes.setVisibility(View.GONE);
     }
 
+        }
+    }
 }
