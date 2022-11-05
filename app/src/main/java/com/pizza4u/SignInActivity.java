@@ -56,8 +56,16 @@ public class SignInActivity extends AppCompatActivity {
                                             // Log.d("Email", email);
 
                                             if(document.get("password").toString().equals(editTextPassword.getText().toString().trim())) {
-                                                Intent intent = new Intent(SignInActivity.this, CustomerMainActivity.class);
-                                                startActivity(intent);
+                                                switch (document.get("acctype").toString()) {
+                                                    case "Customer":
+                                                        Intent intent1 = new Intent(SignInActivity.this, CustomerMainActivity.class);
+                                                        startActivity(intent1);
+                                                        break;
+                                                    case "Manager":
+                                                        Intent intent2 = new Intent(SignInActivity.this, ManagerMainActivity.class);
+                                                        startActivity(intent2);
+                                                        break;
+                                                }
                                             } else {
                                                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                                                     @Override
