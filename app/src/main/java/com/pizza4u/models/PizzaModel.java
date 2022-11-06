@@ -1,4 +1,4 @@
-package com.pizza4u;
+package com.pizza4u.models;
 
 public class PizzaModel {
     String name,description,photo_url,pizza_type;

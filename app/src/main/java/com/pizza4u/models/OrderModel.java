@@ -1,4 +1,4 @@
-package com.pizza4u;
+package com.pizza4u.models;
 
 import com.google.type.DateTime;
 
