@@ -2,9 +2,14 @@ package com.pizza4u;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import java.util.Locale;
 
 public class AddBranchActivity extends AppCompatActivity {
 
@@ -13,6 +18,7 @@ public class AddBranchActivity extends AppCompatActivity {
     Button buttonOpenMap;
     Button buttonOk;
     Button buttonExit;
+    Button buttonInstructions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,5 +30,30 @@ public class AddBranchActivity extends AppCompatActivity {
         buttonOpenMap = findViewById(R.id.buttonOpenMap);
         buttonOk = findViewById(R.id.buttonOk);
         buttonExit = findViewById(R.id.buttonExit);
+        buttonInstructions = findViewById(R.id.buttonInstructions);
+
+        buttonInstructions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddBranchActivity.this , AddBranchLocationInstructionsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonOpenMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String uri = String.format(Locale.ENGLISH, "geo:0,0");
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                startActivity(intent);
+            }
+        });
+
+        buttonExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }
