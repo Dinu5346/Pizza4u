@@ -14,7 +14,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.pizza4u.models.CartItemModel;
+import com.pizza4u.models.UserModel;
 
 import java.util.ArrayList;
 
@@ -26,7 +32,8 @@ public class CusCartFragment extends Fragment {
     private CartRecycleAdapter cartRecycleAdapter;
     private TextView txttot;
     private Button btnOrder;
-    CartItemModel cartItemModel;
+    UserModel userModel;
+    ArrayList<CartItemModel> cartItemModelArrayList;
     //private DatabaseHelper newDB;
 
 
@@ -34,8 +41,8 @@ public class CusCartFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public CusCartFragment(CartItemModel cartItemModel) {
-        this.cartItemModel=cartItemModel;
+    public CusCartFragment(ArrayList<CartItemModel> cartItemModelArrayList) {
+        this.cartItemModelArrayList=cartItemModelArrayList;
     }
 
     public static CusCartFragment newInstance(String param1, String param2) {
@@ -74,6 +81,36 @@ public class CusCartFragment extends Fragment {
         name = new ArrayList<>();
         price = new ArrayList<>();
         count = new ArrayList<>();
+
+        cartItemModelArrayList=new ArrayList<>();
+        cartRecycleAdapter=new CartRecycleAdapter(this.getContext(),cartItemModelArrayList);
+        recyclerView.setAdapter(cartRecycleAdapter);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("cart-items")
+                .whereEqualTo("email",userModel.getUserID() )
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            if(!task.getResult().isEmpty()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    // Log.d(TAG, document.getId() + " => " + document.getData());
+                                    String documentid = document.getId();
+                                    // Log.d("Email", email);
+
+                                    CartItemModel cartItemModel =document.toObject(CartItemModel.class);
+                                    cartItemModelArrayList.add(cartItemModel);
+                                    cartRecycleAdapter.notifyDataSetChanged();
+
+                                }
+                            }}
+                    }
+
+                });
+
 
         //Cursor cursor = newDB.displayNotes(Integer.valueOf(MainActivity.id.get(0)));
 //            imgNoNotes.setVisibility(View.VISIBLE);

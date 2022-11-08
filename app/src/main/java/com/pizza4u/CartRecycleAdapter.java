@@ -14,20 +14,21 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pizza4u.models.CartItemModel;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class CartRecycleAdapter extends RecyclerView.Adapter<CartRecycleAdapter.CartViewHolder> {
 
     private Context mContext;
-    private ArrayList name,photo,price,count;
-    private int position;
+    public List<CartItemModel> cartItemModelList;
+    public int position;
 
-    public CartRecycleAdapter(Context mContext,ArrayList name,ArrayList photo,ArrayList price,ArrayList count) {
-        this.mContext=mContext;
-        this.name=name;
-        this.photo=photo;
-        this.price=price;
-        this.count=count;
+
+    public CartRecycleAdapter(Context mContext, List<CartItemModel> cartItemModelList) {
+        this.mContext = mContext;
+        this.cartItemModelList = cartItemModelList;
     }
 
     @NonNull
@@ -38,26 +39,28 @@ public class CartRecycleAdapter extends RecyclerView.Adapter<CartRecycleAdapter.
         return new CartRecycleAdapter.CartViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, @SuppressLint("RecyclerView") int position) {
         this.position=position;
-        holder.txtName.setText(String.valueOf(name.get(position)));
-        holder.txtPrice.setText(String.valueOf(price.get(position)));
-        holder.txtCount.setText(String.valueOf(count.get(position)));
+        holder.txtName.setText(cartItemModelList.get(position).getPizzaName());
+        holder.txtPrice.setText(cartItemModelList.get(position).getPrice().toString());
+        holder.txtCount.setText(cartItemModelList.get(position).getCount());
+
+        cartItemModelList.get(position).setCount(Integer.parseInt(holder.txtCount.getText().toString()));
 
     }
 
 
     @Override
     public int getItemCount() {
-        return 0;
+        return cartItemModelList.size();
     }
 
     public static class CartViewHolder extends RecyclerView.ViewHolder{
 
         public TextView txtName,txtPrice,txtCount;
         public ImageButton btnplus,btnminus;
-        public ImageView img;
         ConstraintLayout cartItemLayout;
 
         public CartViewHolder(@NonNull View itemView) {
@@ -73,14 +76,20 @@ public class CartRecycleAdapter extends RecyclerView.Adapter<CartRecycleAdapter.
             btnplus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    int count = Integer.parseInt(txtCount.getText().toString());
+                    count++;
+                    txtCount.setText(count);
                 }
             });
 
             btnminus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    int count = Integer.parseInt(txtCount.getText().toString());
+                    if(count!=0){
+                        count--;
+                        txtCount.setText(count);
+                    }
                 }
             });
         }

@@ -29,6 +29,8 @@ import com.pizza4u.models.PizzaModel;
 import com.pizza4u.models.PizzaTypeModel;
 import com.pizza4u.models.UserModel;
 
+import java.util.ArrayList;
+
 public class CustomerMainActivity extends AppCompatActivity {
 
     BottomNavigationView nav;
@@ -38,13 +40,15 @@ public class CustomerMainActivity extends AppCompatActivity {
     PizzaModel pizzaModel;
     OrderModel orderModel;
     OrderItemModel orderItemModel;
-    CartItemModel cartItemModel;
+    ArrayList<CartItemModel> cartItemModelArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_main);
         replaceFragment(new CusHomeFragment());
+
+        cartItemModelArrayList = new ArrayList<>();
 
         Intent intent = getIntent();
         userModel=(UserModel) intent.getSerializableExtra("userData");
@@ -89,26 +93,6 @@ public class CustomerMainActivity extends AppCompatActivity {
 
                 });
 
-        db.collection("cart-items")
-                .whereEqualTo("email",userModel.getUserID() )
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            if(!task.getResult().isEmpty()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    // Log.d(TAG, document.getId() + " => " + document.getData());
-                                    // String email = document.get("email").toString();
-                                    // Log.d("Email", email);
-
-                                    cartItemModel =document.toObject(CartItemModel.class);
-
-                                }
-                            }}
-                    }
-
-                });
 
         db.collection("orders")
                 .get()
@@ -162,7 +146,7 @@ public class CustomerMainActivity extends AppCompatActivity {
                         replaceFragment(new CusHomeFragment());
                         break;
                     case R.id.cart:
-                        replaceFragment(new CusCartFragment(cartItemModel));
+                        replaceFragment(new CusCartFragment());
                         break;
                     case R.id.orders:
                         replaceFragment(new CusOrdersFragment());
