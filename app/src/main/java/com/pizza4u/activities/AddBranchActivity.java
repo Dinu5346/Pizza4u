@@ -1,10 +1,12 @@
-package com.pizza4u;
+package com.pizza4u.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.pizza4u.R;
 
 public class AddBranchActivity extends AppCompatActivity {
 

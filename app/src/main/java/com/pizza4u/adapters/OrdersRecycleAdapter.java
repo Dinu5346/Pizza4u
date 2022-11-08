@@ -1,4 +1,4 @@
-package com.pizza4u;
+package com.pizza4u.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,19 +12,22 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pizza4u.activities.CusOrderActivity;
+import com.pizza4u.R;
+import com.pizza4u.models.OrderModel;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrdersRecycleAdapter extends RecyclerView.Adapter<OrdersRecycleAdapter.OrdersViewHolder>{
     Context mContext;
-    private ArrayList orderid,price,date,status;
     private int position;
+    List<OrderModel> orderModelList;
 
-    public OrdersRecycleAdapter(Context mContext,ArrayList orderid,ArrayList price,ArrayList status,ArrayList date) {
-        this.mContext=mContext;
-        this.orderid=orderid;
-        this.price=price;
-        this.date = date;
-        this.status=status;
+
+    public OrdersRecycleAdapter(Context context, List<OrderModel> orderModelArrayList) {
+        this.mContext=context;
+        this.orderModelList=orderModelArrayList;
     }
 
     @NonNull
@@ -36,21 +39,22 @@ public class OrdersRecycleAdapter extends RecyclerView.Adapter<OrdersRecycleAdap
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull OrdersViewHolder holder, @SuppressLint("RecyclerView") int position) {
         this.position=position;
 
-        holder.txtOrderid.setText(String.valueOf(orderid.get(position)));
-        holder.txtPrice.setText(String.valueOf(price.get(position)));
-        holder.txtDate.setText(String.valueOf(date.get(position)));
-        holder.txtStatus.setText(String.valueOf(status.get(position)));
+        holder.txtOrderid.setText("Order "+orderModelList.get(position).getOrderId());
+        holder.txtPrice.setText(orderModelList.get(position).getTotal().toString());
+        holder.txtDate.setText(orderModelList.get(position).getDate().toString());
+        holder.txtStatus.setText(orderModelList.get(position).getStatus());
 
         holder.oLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(mContext,CusOrderActivity.class);
-                intent.putExtra("orderId",String.valueOf(orderid.get(position)));
-                intent.putExtra("price",String.valueOf(price.get(position)));
+                Intent intent=new Intent(mContext, CusOrderActivity.class);
+                intent.putExtra("orderId",String.valueOf(orderModelList.get(position).getOrderId()));
+                intent.putExtra("price",String.valueOf(orderModelList.get(position).getTotal()));
                 //intent.putExtra("date",String.valueOf(date.get(position)));
                 //intent.putExtra("status",String.valueOf(status.get(position)));
 
@@ -62,7 +66,7 @@ public class OrdersRecycleAdapter extends RecyclerView.Adapter<OrdersRecycleAdap
 
     @Override
     public int getItemCount() {
-        return 0;
+        return orderModelList.size();
     }
 
     public static class OrdersViewHolder extends RecyclerView.ViewHolder{

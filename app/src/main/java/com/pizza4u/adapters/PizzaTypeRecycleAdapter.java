@@ -1,9 +1,8 @@
-package com.pizza4u;
+package com.pizza4u.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +13,22 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pizza4u.activities.CusPizzaListActivity;
+import com.pizza4u.R;
+import com.pizza4u.models.PizzaTypeModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PizzaTypeRecycleAdapter extends RecyclerView.Adapter<PizzaTypeRecycleAdapter.PTypesViewHolder> {
 
     private Context mContext;
-    private ArrayList ptype,photo;
+    public List<PizzaTypeModel> pizzaTypeModelList;
     private int position;
 
-    public PizzaTypeRecycleAdapter(Context mContext,ArrayList ptype,ArrayList photo) {
+    public PizzaTypeRecycleAdapter(Context mContext,List<PizzaTypeModel> pizzaTypeModels) {
         this.mContext = mContext;
-        this.ptype = ptype;
-        this.photo = photo;
+        this.pizzaTypeModelList=pizzaTypeModels;
     }
 
 
@@ -42,18 +44,19 @@ public class PizzaTypeRecycleAdapter extends RecyclerView.Adapter<PizzaTypeRecyc
     public void onBindViewHolder(@NonNull PizzaTypeRecycleAdapter.PTypesViewHolder holder, @SuppressLint("RecyclerView") int position) {
         this.position = position;
 
-        holder.txtPtype.setText(String.valueOf(ptype.get(position)));
+        holder.txtPtype.setText(pizzaTypeModelList.get(position).getTypeName());
 
         holder.ptypesLayout.setOnClickListener(view -> {
-            Intent intent = new Intent(mContext,CusPizzaListActivity.class);
-            intent.putExtra("ptype",String.valueOf(ptype.get(position)));
+            Intent intent = new Intent(mContext, CusPizzaListActivity.class);
+            intent.putExtra("ptypeID",pizzaTypeModelList.get(position).getTypeID());
+            intent.putExtra("ptypeName",pizzaTypeModelList.get(position).getTypeName());
             mContext.startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
-        return ptype.size();
+        return pizzaTypeModelList.size();
     }
 
     public static class PTypesViewHolder extends RecyclerView.ViewHolder{
