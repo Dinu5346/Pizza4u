@@ -6,21 +6,21 @@ public class OrderModel {
     String userID;
     String orderId;
     String status;
-    Float total;
-    DateTime date;
-    Double longitude;
-    Double latitude;
+    Double total;
+    String dateTime;
+    String longitude;
+    String latitude;
 
 
     public OrderModel() {
     }
 
-    public OrderModel(String userID,String orderId,String status, Float price, DateTime date, Double longitude, Double latitude) {
+    public OrderModel(String userID,String orderId,String status, Double price, String date, String longitude, String latitude) {
         this.userID=userID;
         this.orderId = orderId;
         this.status=status;
         this.total = price;
-        this.date = date;
+        this.dateTime = date;
         this.longitude = longitude;
         this.latitude = latitude;
     }
@@ -41,19 +41,19 @@ public class OrderModel {
         this.userID = userID;
     }
 
-    public Double getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Double longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
-    public Double getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Double latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
@@ -65,19 +65,19 @@ public class OrderModel {
         this.orderId = orderId;
     }
 
-    public Float getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(Float total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 
-    public DateTime getDate() {
-        return date;
+    public DateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setDate(DateTime date) {
-        this.date = date;
+    public void setDateTime(DateTime dateTime) {
+        this.dateTime = dateTime;
     }
 }

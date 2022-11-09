@@ -3,7 +3,6 @@ package com.pizza4u.models;
 public class OrderItemModel {
     String userID;
     String orderID;
-    String pizzaId;
     String pizzaName;
     int count;
     Float subTotal;
@@ -12,10 +11,9 @@ public class OrderItemModel {
     public OrderItemModel() {
     }
 
-    public OrderItemModel(String userID,String orderID,String pizzaId,String pizzaName, int count, Float price,String size) {
+    public OrderItemModel(String userID,String orderID,String pizzaName, int count, Float price,String size) {
         this.userID=userID;
         this.orderID=orderID;
-        this.pizzaId=pizzaId;
         this.pizzaName = pizzaName;
         this.count = count;
         this.subTotal = price;
@@ -44,14 +42,6 @@ public class OrderItemModel {
 
     public void setOrderID(String orderID) {
         this.orderID = orderID;
-    }
-
-    public String getPizzaId() {
-        return pizzaId;
-    }
-
-    public void setPizzaId(String pizzaId) {
-        this.pizzaId = pizzaId;
     }
 
     public String getPizzaName() {

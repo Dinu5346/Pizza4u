@@ -16,18 +16,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.type.DateTime;
 import com.pizza4u.R;
 import com.pizza4u.adapters.CartRecycleAdapter;
 import com.pizza4u.models.CartItemModel;
+import com.pizza4u.models.OrderItemModel;
+import com.pizza4u.models.OrderModel;
 import com.pizza4u.models.UserModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class CusCartFragment extends Fragment {
@@ -39,8 +51,14 @@ public class CusCartFragment extends Fragment {
     double tot=0.00;
     private Button btnOrder;
     UserModel userModel;
+    OrderModel orderModel;
+    ArrayList<OrderModel> orderModelArrayList;
     ArrayList<CartItemModel> cartItemModelArrayList;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    String longitude,latitude;
+    Calendar c = Calendar.getInstance();
+    @SuppressLint("SimpleDateFormat")
+    SimpleDateFormat dateformat = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss aa");
 
     public CusCartFragment() {
         // Required empty public constructor
@@ -141,8 +159,48 @@ public class CusCartFragment extends Fragment {
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                 CollectionReference dbCartItems = db.collection("cart-items");
+                 CollectionReference dbOrderItems = db.collection("order-items");
+
+                int orderID;
+
+                 if(orderModelArrayList.isEmpty()){
+                     orderID= 1;
+                 }else {
+                     orderID=(int) orderModelArrayList.size()+2;
+                 }
 
 
+                 //add to orders
+                  OrderModel orderModel = new OrderModel(userModel.getUserID(),Integer.toString(orderID),"Queued",tot,dateformat.format(c.getTime()) ,longitude,latitude);
+                  dbOrderItems.add(orderModel).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Toast.makeText(getContext(), "Your order has been added to Firebase Firestore Orders", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Failed to add your order to Firebase Firestore Orders", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                //delete
+                for (CartItemModel item : cartItemModelArrayList) {
+                    OrderItemModel orderItemModel = new OrderItemModel(userModel.getUserID(),orderModel.getOrderId(),item.getPizzaName(),item.getCount(),item.getSubTotal(),item.getSize());
+                    dbOrderItems.add(orderItemModel).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                              Toast.makeText(getContext(), "Your order item has been added to Firebase Firestore Order Items", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                              Toast.makeText(getContext(), "Failed to add your order item to Firebase Firestore Order Items", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    dbCartItems.document(item.getDocId()).delete();
+                }
             }
         });
 

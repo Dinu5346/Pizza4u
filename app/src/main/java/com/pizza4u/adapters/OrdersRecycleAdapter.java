@@ -16,7 +16,6 @@ import com.pizza4u.activities.CusOrderActivity;
 import com.pizza4u.R;
 import com.pizza4u.models.OrderModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OrdersRecycleAdapter extends RecyclerView.Adapter<OrdersRecycleAdapter.OrdersViewHolder>{
@@ -46,7 +45,7 @@ public class OrdersRecycleAdapter extends RecyclerView.Adapter<OrdersRecycleAdap
 
         holder.txtOrderid.setText("Order "+orderModelList.get(position).getOrderId());
         holder.txtPrice.setText(orderModelList.get(position).getTotal().toString());
-        holder.txtDate.setText(orderModelList.get(position).getDate().toString());
+        holder.txtDate.setText(orderModelList.get(position).getDateTime().toString());
         holder.txtStatus.setText(orderModelList.get(position).getStatus());
 
         holder.oLayout.setOnClickListener(new View.OnClickListener() {
