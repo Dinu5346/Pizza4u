@@ -26,7 +26,6 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class ManagerMainActivity extends AppCompatActivity {
-
     ImageView imageViewManager;
     Button buttonAddBranch;
     Button buttonAddEmployee;
