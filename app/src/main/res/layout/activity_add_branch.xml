@@ -45,15 +45,16 @@
         android:id="@+id/editTextLocationName"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="Location Name"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextBranchName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextBranchId" />
 
     <Button
         android:id="@+id/buttonOk"
@@ -110,5 +111,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextLocationName" />
+
+    <EditText
+        android:id="@+id/editTextBranchId"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextBranchName"
+        android:hint="Branch ID"
+        android:textColorHint="@color/black"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
