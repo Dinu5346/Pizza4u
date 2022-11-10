@@ -36,11 +36,14 @@ public class ManagerMainActivity extends AppCompatActivity {
         buttonAddMenu = findViewById(R.id.buttonAddMenu);
         txtManagerName=findViewById(R.id.textManager_name);
 
-        UserModel userModel = (UserModel) getIntent().getSerializableExtra("userData");
-        Log.d("UserData from Manager Home", userModel.getEmail() + " " + userModel.getFname());
+        if(getIntent().hasExtra("userData")){
+            UserModel userModel = (UserModel) getIntent().getSerializableExtra("userData");
+            Log.d("UserData from Manager Home", userModel.getEmail() + " " + userModel.getFname());
 
         Picasso.get().load(userModel.getProfilepic()).into(imageViewManager);
         txtManagerName.setText(userModel.getFname()+" "+userModel.getLname());
+        
+        }
 
         buttonAddBranch.setOnClickListener(new View.OnClickListener() {
             @Override
