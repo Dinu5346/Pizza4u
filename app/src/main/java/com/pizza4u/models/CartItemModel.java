@@ -1,7 +1,7 @@
 package com.pizza4u.models;
 
 public class CartItemModel {
-    String userID;
+    String userEmail;
     String pizzaName;
     String size;
     Float subTotal;
@@ -13,7 +13,7 @@ public class CartItemModel {
     }
 
     public CartItemModel(String userID, String pizzaName,String size, Float price,Float unitPrice, int count,String docId) {
-        this.userID=userID;
+        this.userEmail =userID;
         this.size=size;
         this.pizzaName = pizzaName;
         this.subTotal = price;
@@ -22,12 +22,12 @@ public class CartItemModel {
         this.docId=docId;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public String getDocId() {

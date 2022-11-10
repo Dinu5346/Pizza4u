@@ -70,7 +70,7 @@ public class CusOrdersFragment extends Fragment {
         orderModelArrayList=new ArrayList<>();
 
         db.collection("orders")
-                .whereEqualTo("userID",userModel.getDocID())
+                .whereEqualTo("userEmail",userModel.getEmail())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @SuppressLint("NotifyDataSetChanged")

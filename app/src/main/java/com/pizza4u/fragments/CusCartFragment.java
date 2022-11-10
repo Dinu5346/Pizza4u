@@ -125,7 +125,7 @@ public class CusCartFragment extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("cart-items")
-                .whereEqualTo("userID",userModel.getDocID() )
+                .whereEqualTo("userEmail",userModel.getEmail() )
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @SuppressLint("NotifyDataSetChanged")

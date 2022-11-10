@@ -49,7 +49,7 @@ public class CusOrderActivity extends AppCompatActivity {
         orderItemModelArrayList=new ArrayList<>();
 
         db.collection("orders")
-                .whereEqualTo("userID",userModel.getDocID())
+                .whereEqualTo("userEmail",userModel.getEmail())
                 .whereEqualTo("orderID",orderid)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

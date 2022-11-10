@@ -1,9 +1,7 @@
 package com.pizza4u.models;
 
-import com.google.type.DateTime;
-
 public class OrderModel {
-    String userID;
+    String userEmail;
     String orderId;
     String status;
     Double total;
@@ -16,7 +14,7 @@ public class OrderModel {
     }
 
     public OrderModel(String userID,String orderId,String status, Double price, String date, String longitude, String latitude) {
-        this.userID=userID;
+        this.userEmail =userID;
         this.orderId = orderId;
         this.status=status;
         this.total = price;
@@ -33,12 +31,12 @@ public class OrderModel {
         this.status = status;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public String getLongitude() {
