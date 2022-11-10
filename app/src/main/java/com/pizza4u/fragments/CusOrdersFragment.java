@@ -22,7 +22,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.pizza4u.R;
 import com.pizza4u.adapters.OrdersRecycleAdapter;
 import com.pizza4u.models.OrderModel;
-import com.pizza4u.models.PizzaModel;
 import com.pizza4u.models.UserModel;
 
 import java.util.ArrayList;
@@ -71,7 +70,7 @@ public class CusOrdersFragment extends Fragment {
         orderModelArrayList=new ArrayList<>();
 
         db.collection("orders")
-                .whereEqualTo("userID",userModel.getUserID())
+                .whereEqualTo("userID",userModel.getDocID())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @SuppressLint("NotifyDataSetChanged")

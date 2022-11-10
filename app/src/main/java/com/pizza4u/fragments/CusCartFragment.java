@@ -1,7 +1,6 @@
 package com.pizza4u.fragments;
 
 import static java.lang.Double.parseDouble;
-import static java.lang.Float.parseFloat;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -27,7 +26,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.type.DateTime;
 import com.pizza4u.R;
 import com.pizza4u.adapters.CartRecycleAdapter;
 import com.pizza4u.models.CartItemModel;
@@ -38,8 +36,6 @@ import com.pizza4u.models.UserModel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 public class CusCartFragment extends Fragment {
@@ -129,7 +125,7 @@ public class CusCartFragment extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("cart-items")
-                .whereEqualTo("userID",userModel.getUserID() )
+                .whereEqualTo("userID",userModel.getDocID() )
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @SuppressLint("NotifyDataSetChanged")
@@ -172,7 +168,7 @@ public class CusCartFragment extends Fragment {
 
 
                  //add to orders
-                  OrderModel orderModel = new OrderModel(userModel.getUserID(),Integer.toString(orderID),"Queued",tot,dateformat.format(c.getTime()) ,longitude,latitude);
+                  OrderModel orderModel = new OrderModel(userModel.getDocID(),Integer.toString(orderID),"Queued",tot,dateformat.format(c.getTime()) ,longitude,latitude);
                   dbOrderItems.add(orderModel).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
@@ -185,9 +181,9 @@ public class CusCartFragment extends Fragment {
                     }
                 });
 
-                //delete
+                //add to order items and delete from cart
                 for (CartItemModel item : cartItemModelArrayList) {
-                    OrderItemModel orderItemModel = new OrderItemModel(userModel.getUserID(),orderModel.getOrderId(),item.getPizzaName(),item.getCount(),item.getSubTotal(),item.getSize());
+                    OrderItemModel orderItemModel = new OrderItemModel(userModel.getDocID(),orderModel.getOrderId(),item.getPizzaName(),item.getCount(),item.getSubTotal(),item.getSize());
                     dbOrderItems.add(orderItemModel).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
@@ -200,6 +196,7 @@ public class CusCartFragment extends Fragment {
                         }
                     });
                     dbCartItems.document(item.getDocId()).delete();
+                    cartItemModelArrayList.remove(item);
                 }
             }
         });

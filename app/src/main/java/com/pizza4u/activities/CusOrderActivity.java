@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,9 +16,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.pizza4u.R;
 import com.pizza4u.adapters.OrderItemsRecycleAdapter;
-import com.pizza4u.adapters.OrdersRecycleAdapter;
 import com.pizza4u.models.OrderItemModel;
-import com.pizza4u.models.OrderModel;
 import com.pizza4u.models.UserModel;
 
 import java.util.ArrayList;
@@ -52,7 +49,7 @@ public class CusOrderActivity extends AppCompatActivity {
         orderItemModelArrayList=new ArrayList<>();
 
         db.collection("orders")
-                .whereEqualTo("userID",userModel.getUserID())
+                .whereEqualTo("userID",userModel.getDocID())
                 .whereEqualTo("orderID",orderid)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

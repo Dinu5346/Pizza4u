@@ -82,7 +82,7 @@ public class CusPizzaViewActivity extends AppCompatActivity {
                         CollectionReference dbCartItems = db.collection("cart-items");
                         DocumentReference documentReference = dbCartItems.document();
 
-                        CartItemModel cartItemModel = new CartItemModel(userModel.getUserID(),txtName.getText().toString(),size,parseFloat(txtPrice.getText().toString()),parseFloat(price),1,documentReference.getId());
+                        CartItemModel cartItemModel = new CartItemModel(userModel.getEmail(),txtName.getText().toString(),size,parseFloat(txtPrice.getText().toString()),parseFloat(price),1,documentReference.getId());
 
                         documentReference.set(cartItemModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
