@@ -105,7 +105,9 @@ public class CusProfileFragment extends Fragment {
         edt_lname.setText(userModel.getLname());
         edt_email.setText(userModel.getEmail());
         edt_phone.setText(userModel.getPhone());
+
         Picasso.get().load(userModel.getProfilepic()).into(imgPP);
+
 
         btn_changePP.setOnClickListener(new View.OnClickListener() {
             @Override
