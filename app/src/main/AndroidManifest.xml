@@ -14,6 +14,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pizza4u">
         <activity
+            android:name=".AddPizzaActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AddPizzaTypeActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ManagerAddMenuActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".EmpOrderActivity"
             android:exported="false">
             <meta-data
