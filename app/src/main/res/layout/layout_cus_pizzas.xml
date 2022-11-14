@@ -33,7 +33,6 @@
                 android:textSize="18dp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@+id/imagePizza"
-                app:layout_constraintTop_toEndOf="@id/imagePizza"
                 app:layout_constraintVertical_bias="0.931" />
 
             <ImageView
