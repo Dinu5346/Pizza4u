@@ -14,35 +14,37 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pizza4u">
         <activity
-            android:name=".AddPizzaActivity"
+            android:name=".activities.AddPizzaTypeActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AddPizzaTypeActivity"
+            android:name=".activities.EmpOrderActivity"
+
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ManagerAddMenuActivity"
+            android:name=".activities.AddPizzaActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".EmpOrderActivity"
+            android:name=".activities.ManagerMenuActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
-            android:name=".CheckOrdersActivity"
+            android:name=".activities.CheckOrdersActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
