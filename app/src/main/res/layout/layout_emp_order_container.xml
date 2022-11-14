@@ -146,7 +146,6 @@
             android:contentDescription=""
             android:entries="@array/change_status"
             android:minHeight="30dp"
-            android:prompt="Queued"
             android:textColor="#4CAF50"
             android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"

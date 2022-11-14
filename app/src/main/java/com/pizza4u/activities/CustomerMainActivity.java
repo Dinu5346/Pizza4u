@@ -41,6 +41,7 @@ public class CustomerMainActivity extends AppCompatActivity {
     OrderModel orderModel;
     OrderItemModel orderItemModel;
     ArrayList<CartItemModel> cartItemModelArrayList;
+    Fragment cusProfileFragmentNew;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +139,8 @@ public class CustomerMainActivity extends AppCompatActivity {
         Log.d("UserData from Customer Home", userModel.getEmail() + " " + userModel.getFname());
 
         nav = findViewById(R.id.nav_bar);
+        cusProfileFragmentNew = CusProfileFragment.newInstance(userModel);
+
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -152,7 +155,7 @@ public class CustomerMainActivity extends AppCompatActivity {
                         replaceFragment(new CusOrdersFragment());
                         break;
                     case R.id.profile:
-                        replaceFragment(new CusProfileFragment(userModel));
+                        replaceFragment(cusProfileFragmentNew);
                         break;
 
                 }

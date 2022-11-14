@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.google.android.gms.tasks.Continuation;
@@ -50,32 +51,40 @@ public class CusProfileFragment extends Fragment {
 
     private View view;
     private EditText edt_fname,edt_lname,edt_phone,edt_email,edt_password;
-    private Button btnSave,btn_changePP;
+    private Button btnSave;
+    private ImageButton btn_changePP;
     private ImageView imgPP;
     Bitmap image;
     Uri selectedImage;
     String profilepicUri;
-    UserModel userModel;
+    public UserModel userModelGlobal;
+    private static final String USERMODEL_KEY = "usermodel_key";
 
     public CusProfileFragment() {
         // Required empty public constructor
     }
 
-    public  CusProfileFragment(UserModel userModel){
-        this.userModel=userModel;
-    }
-
-    public static CusProfileFragment newInstance(String param1, String param2) {
+    @NonNull
+    public static CusProfileFragment newInstance (UserModel userModel) {
         CusProfileFragment fragment = new CusProfileFragment();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(USERMODEL_KEY, userModel);
+        fragment.setArguments(bundle);
         return fragment;
     }
+
+//    public static CusProfileFragment newInstance(String param1, String param2) {
+//        CusProfileFragment fragment = new CusProfileFragment();
+//        Bundle args = new Bundle();
+//
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        Log.d("User model from customer", userModel.getFname());
     }
 
     @Override
@@ -98,15 +107,19 @@ public class CusProfileFragment extends Fragment {
         btnSave=view.findViewById(R.id.btnSave);
         btn_changePP=view.findViewById(R.id.btnEditProPic);
 
+        assert getArguments() != null;
+        userModelGlobal = (UserModel) getArguments().getSerializable(USERMODEL_KEY);
+        Log.d("User model from customer", userModelGlobal.getFname());
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseStorage storage = FirebaseStorage.getInstance();
 
-        edt_fname.setText(userModel.getFname());
-        edt_lname.setText(userModel.getLname());
-        edt_email.setText(userModel.getEmail());
-        edt_phone.setText(userModel.getPhone());
+        edt_fname.setText(userModelGlobal.getFname());
+        edt_lname.setText(userModelGlobal.getLname());
+        edt_email.setText(userModelGlobal.getEmail());
+        edt_phone.setText(userModelGlobal.getPhone());
 
-        Picasso.get().load(userModel.getProfilepic()).into(imgPP);
+        Picasso.get().load(userModelGlobal.getProfilepic()).into(imgPP);
 
 
         btn_changePP.setOnClickListener(new View.OnClickListener() {
@@ -229,7 +242,7 @@ public class CusProfileFragment extends Fragment {
                 }
                 //If image is not changed
                 else {
-                    updateCustomer(db,view,userModel.getProfilepic());
+                    updateCustomer(db,view,userModelGlobal.getProfilepic());
                 }
 
 
@@ -315,16 +328,16 @@ public class CusProfileFragment extends Fragment {
 
     public void updateCustomer(FirebaseFirestore db,View view,String downloadUri){
         CollectionReference dbUsers = db.collection("users");
-        DocumentReference documentReference = dbUsers.document(userModel.getDocID());
+        DocumentReference documentReference = dbUsers.document(userModelGlobal.getDocID());
 
-        userModel.setEmail(edt_email.getText().toString().trim());
-        userModel.setFname(edt_fname.getText().toString().trim());
-        userModel.setLname(edt_lname.getText().toString().trim());
-        userModel.setPhone(parseInt(edt_phone.getText().toString()));
-        userModel.setPassword(edt_password.getText().toString().trim());
-        userModel.setProfilepic(downloadUri);
+        userModelGlobal.setEmail(edt_email.getText().toString().trim());
+        userModelGlobal.setFname(edt_fname.getText().toString().trim());
+        userModelGlobal.setLname(edt_lname.getText().toString().trim());
+        userModelGlobal.setPhone(parseInt(edt_phone.getText().toString()));
+        userModelGlobal.setPassword(edt_password.getText().toString().trim());
+        userModelGlobal.setProfilepic(downloadUri);
 
-        documentReference.set(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+        documentReference.set(userModelGlobal).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -364,6 +377,4 @@ public class CusProfileFragment extends Fragment {
         });
 
     }
-
-
 }

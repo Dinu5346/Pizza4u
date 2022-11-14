@@ -122,7 +122,7 @@ public class CusCartFragment extends Fragment {
         cartRecycleAdapter=new CartRecycleAdapter(this.getContext(),cartItemModelArrayList);
         recyclerView.setAdapter(cartRecycleAdapter);
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+//        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("cart-items")
                 .whereEqualTo("userEmail",userModel.getEmail() )
@@ -135,7 +135,7 @@ public class CusCartFragment extends Fragment {
                             if(!task.getResult().isEmpty()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     // Log.d(TAG, document.getId() + " => " + document.getData());
-                                    String documentid = document.getId();
+                                    // String documentid = document.getId();
                                     // Log.d("Email", email);
 
                                     tot+=parseDouble(Objects.requireNonNull(document.get("subTotal")).toString());
