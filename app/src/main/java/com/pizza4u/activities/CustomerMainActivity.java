@@ -46,7 +46,7 @@ public class CustomerMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_main);
-        replaceFragment(new CusProfileFragment());
+        replaceFragment(new CusHomeFragment());
 
         cartItemModelArrayList = new ArrayList<>();
 
@@ -152,7 +152,13 @@ public class CustomerMainActivity extends AppCompatActivity {
                         replaceFragment(new CusOrdersFragment());
                         break;
                     case R.id.profile:
-                        replaceFragment(new CusProfileFragment(userModel));
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("userModel", userModel);
+
+                        getSupportFragmentManager().beginTransaction()
+                                .setReorderingAllowed(true)
+                                .replace(R.id.nav_frame_container, CusProfileFragment.class, bundle)
+                                .commit();
                         break;
 
                 }
