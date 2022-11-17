@@ -62,6 +62,14 @@ public class ManagerMainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        buttonAddMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ManagerMainActivity.this , ManagerMenuActivity.class);
+                startActivity(intent);
+            }
+        });
         }
     }
 }

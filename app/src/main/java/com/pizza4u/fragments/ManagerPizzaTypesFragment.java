@@ -73,7 +73,7 @@ public class ManagerPizzaTypesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         recyclerView = view.findViewById(R.id.recycler_pizza_types_manager);
-        btnNew=view.findViewById(R.id.btnSave_manager_pizzaTypeAdd);
+        btnNew=view.findViewById(R.id.btn_add_pizza_type);
 
         btnNew.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +114,8 @@ public class ManagerPizzaTypesFragment extends Fragment {
             recyclerView.setAdapter(pizzaTypeRecycleAdapter);
 
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        }else{
+            recyclerView.setVisibility(View.GONE);
         }
     }
 }
