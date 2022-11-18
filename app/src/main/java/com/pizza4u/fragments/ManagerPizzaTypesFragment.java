@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,11 +41,7 @@ public class ManagerPizzaTypesFragment extends Fragment {
     public ManagerPizzaTypesFragment() {
         // Required empty public constructor
     }
-
-    public ManagerPizzaTypesFragment(ArrayList<PizzaTypeModel> pizzaTypeModelArrayList) {
-        this.pizzaTypeModelArrayList = pizzaTypeModelArrayList;
-    }
-
+    
     // TODO: Rename and change types and number of parameters
     public static ManagerPizzaTypesFragment newInstance(String param1, String param2) {
         ManagerPizzaTypesFragment fragment = new ManagerPizzaTypesFragment();
@@ -85,7 +82,7 @@ public class ManagerPizzaTypesFragment extends Fragment {
 
         pizzaTypeModelArrayList=new ArrayList<>();
 
-        db.collection("pizza-types")
+        db.collection("pizza-type")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @SuppressLint("NotifyDataSetChanged")
@@ -100,8 +97,15 @@ public class ManagerPizzaTypesFragment extends Fragment {
 
                                     PizzaTypeModel pizzaTypeModel = document.toObject(PizzaTypeModel.class);
                                     pizzaTypeModelArrayList.add(pizzaTypeModel);
+                                    pizzaTypeRecycleAdapter = new ManagerPTypesRecycleAdapter(getContext(), pizzaTypeModelArrayList);
                                     pizzaTypeRecycleAdapter.notifyDataSetChanged();
-
+                                }
+                                if(!pizzaTypeModelArrayList.isEmpty()) {
+                                    recyclerView.setAdapter(pizzaTypeRecycleAdapter);
+                                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                                }else{
+                                    recyclerView.setVisibility(View.GONE);
+                                    Log.d("else","Hi empty");
                                 }
                             }}
                     }
@@ -109,13 +113,6 @@ public class ManagerPizzaTypesFragment extends Fragment {
                 });
 
 
-        pizzaTypeRecycleAdapter = new ManagerPTypesRecycleAdapter(this.getContext(), pizzaTypeModelArrayList);
-        if(!pizzaTypeModelArrayList.isEmpty()) {
-            recyclerView.setAdapter(pizzaTypeRecycleAdapter);
 
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        }else{
-            recyclerView.setVisibility(View.GONE);
-        }
     }
 }

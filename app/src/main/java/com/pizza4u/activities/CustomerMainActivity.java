@@ -40,11 +40,17 @@ public class CustomerMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_main);
-        replaceFragment(new CusHomeFragment());
-
 
         UserModel userModel = (UserModel) getIntent().getSerializableExtra("userData");
         Log.d("UserData from Customer Home", userModel.getEmail() + " " + userModel.getFname());
+
+        Bundle bundleh = new Bundle();
+        bundleh.putSerializable("userModel", userModel);
+
+        getSupportFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .replace(R.id.nav_frame_container, CusHomeFragment.class, bundleh)
+                .commit();
 
         nav = findViewById(R.id.nav_bar);
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -52,13 +58,31 @@ public class CustomerMainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.home:
-                        replaceFragment(new CusHomeFragment());
+                        Bundle bundleh = new Bundle();
+                        bundleh.putSerializable("userModel", userModel);
+
+                        getSupportFragmentManager().beginTransaction()
+                                .setReorderingAllowed(true)
+                                .replace(R.id.nav_frame_container, CusHomeFragment.class, bundleh)
+                                .commit();
                         break;
                     case R.id.cart:
-                        replaceFragment(new CusCartFragment());
+                        Bundle bundlec = new Bundle();
+                        bundlec.putSerializable("userModel", userModel);
+
+                        getSupportFragmentManager().beginTransaction()
+                                .setReorderingAllowed(true)
+                                .replace(R.id.nav_frame_container, CusCartFragment.class, bundlec)
+                                .commit();
                         break;
                     case R.id.orders:
-                        replaceFragment(new CusOrdersFragment());
+                        Bundle bundleo = new Bundle();
+                        bundleo.putSerializable("userModel", userModel);
+
+                        getSupportFragmentManager().beginTransaction()
+                                .setReorderingAllowed(true)
+                                .replace(R.id.nav_frame_container, CusOrdersFragment.class, bundleo)
+                                .commit();
                         break;
                     case R.id.profile:
                         Bundle bundle = new Bundle();

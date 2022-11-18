@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
 import com.pizza4u.R;
 import com.pizza4u.adapters.CusOrdersRecycleAdapter;
 import com.pizza4u.models.OrderModel;
@@ -29,12 +30,9 @@ import java.util.ArrayList;
 
 public class CusOrdersFragment extends Fragment {
 
-    private View view;
-    UserModel userModel;
     private RecyclerView recyclerView;
     ArrayList<OrderModel> orderModelArrayList;
     CusOrdersRecycleAdapter ordersRecycleAdapter;
-    FirebaseFirestore db =FirebaseFirestore.getInstance();
 
     public CusOrdersFragment() {
         // Required empty public constructor
@@ -65,6 +63,10 @@ public class CusOrdersFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        UserModel userModel = (UserModel) requireArguments().getSerializable("userModel");
+
+        FirebaseFirestore db =FirebaseFirestore.getInstance();
+
         recyclerView = view.findViewById(R.id.recycler_orders);
 
         orderModelArrayList=new ArrayList<>();
@@ -94,8 +96,12 @@ public class CusOrdersFragment extends Fragment {
                 });
 
         ordersRecycleAdapter = new CusOrdersRecycleAdapter(getContext(), orderModelArrayList);
-        recyclerView.setAdapter(ordersRecycleAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        if(!orderModelArrayList.isEmpty()){
+            recyclerView.setAdapter(ordersRecycleAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        }else{
+            recyclerView.setVisibility(View.GONE);
+        }
 
     }
 

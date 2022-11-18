@@ -30,6 +30,7 @@ public class CusPizzaListActivity extends AppCompatActivity {
     FirebaseFirestore db =FirebaseFirestore.getInstance();
     private TextView txtpType;
     private String pType;
+    private String userEmail;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -37,13 +38,12 @@ public class CusPizzaListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cus_pizza_list);
 
-        txtpType = findViewById(R.id.txtPizzaType);
+        txtpType = findViewById(R.id.textPListType);
         recyclerView = findViewById(R.id.recyclerPList);
 
-        getIntent().hasExtra("pTypeName") ;
-
         // getting data from intent
-        pType = getIntent().getStringExtra("pTypeName");
+        pType = getIntent().getStringExtra("ptypeName");
+        userEmail=getIntent().getStringExtra("userEmail");
 
         // setting intent data
         txtpType.setText(pType);
@@ -66,19 +66,19 @@ public class CusPizzaListActivity extends AppCompatActivity {
 
                                     PizzaModel pizzaModel = document.toObject(PizzaModel.class);
                                     pizzaModelArrayList.add(pizzaModel);
+                                    pizzasRecycleAdapter=new PizzasRecycleAdapter(CusPizzaListActivity.this,pizzaModelArrayList,userEmail);
                                     pizzasRecycleAdapter.notifyDataSetChanged();
-
+                                }
+                                if(!pizzaModelArrayList.isEmpty()){
+                                    recyclerView.setAdapter(pizzasRecycleAdapter);
+                                    recyclerView.setLayoutManager(new LinearLayoutManager(CusPizzaListActivity.this));
+                                }else {
+                                    recyclerView.setVisibility(View.GONE);
                                 }
                             }}
                     }
 
                 });
-
-
-        pizzasRecycleAdapter=new PizzasRecycleAdapter(this,pizzaModelArrayList);
-        recyclerView.setAdapter(pizzasRecycleAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(CusPizzaListActivity.this));
-
     }
 
 

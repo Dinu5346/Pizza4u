@@ -42,7 +42,7 @@ public class ManagerPizzasRecycleAdapter extends RecyclerView.Adapter<ManagerPiz
     @Override
     public PizzasViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View view = inflater.inflate(R.layout.layout_cus_pizzas,parent,false);
+        View view = inflater.inflate(R.layout.layout_manager_pizzas,parent,false);
         return new ManagerPizzasRecycleAdapter.PizzasViewHolder(view);
     }
 

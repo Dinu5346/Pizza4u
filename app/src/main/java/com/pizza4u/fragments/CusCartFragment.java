@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -46,11 +47,8 @@ public class CusCartFragment extends Fragment {
     private TextView txttot;
     double tot=0.00;
     private Button btnOrder;
-    UserModel userModel;
-    OrderModel orderModel;
     ArrayList<OrderModel> orderModelArrayList;
     ArrayList<CartItemModel> cartItemModelArrayList;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
     String longitude,latitude;
     Calendar c = Calendar.getInstance();
     @SuppressLint("SimpleDateFormat")
@@ -93,6 +91,11 @@ public class CusCartFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        UserModel userModel = (UserModel) requireArguments().getSerializable("userModel");
+
+        FirebaseFirestore db =FirebaseFirestore.getInstance();
+
+
 //        db.collection("cart")
 //                .get()
 //                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -119,10 +122,7 @@ public class CusCartFragment extends Fragment {
         btnOrder=view.findViewById(R.id.btnPlaceOrder);
 
         cartItemModelArrayList=new ArrayList<>();
-        cartRecycleAdapter=new CartRecycleAdapter(this.getContext(),cartItemModelArrayList);
         recyclerView.setAdapter(cartRecycleAdapter);
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("cart-items")
                 .whereEqualTo("userEmail",userModel.getEmail() )
@@ -142,13 +142,25 @@ public class CusCartFragment extends Fragment {
 
                                     CartItemModel cartItemModel =document.toObject(CartItemModel.class);
                                     cartItemModelArrayList.add(cartItemModel);
+                                    cartRecycleAdapter = new CartRecycleAdapter(getContext(),cartItemModelArrayList,txttot);
                                     cartRecycleAdapter.notifyDataSetChanged();
-
+                                }
+                                if (!cartItemModelArrayList.isEmpty()){
+                                    recyclerView.setAdapter(cartRecycleAdapter);
+                                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                                    txttot.setText(String.valueOf(tot));
+                                }else {
+                                    recyclerView.setVisibility(View.GONE);
+                                    btnOrder.setEnabled(false);
+                                    // btnOrder.setClickable(false);
+                                    //btnOrder.setBackgroundColor();
                                 }
                             }}
                     }
 
                 });
+
+
 
         txttot.setText(Double.toString(tot));
 
