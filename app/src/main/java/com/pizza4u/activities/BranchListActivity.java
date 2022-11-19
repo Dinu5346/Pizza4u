@@ -1,15 +1,16 @@
 package com.pizza4u.activities;
 
-import static java.security.AccessController.getContext;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,30 +18,33 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.pizza4u.R;
-import com.pizza4u.adapters.CusOrdersRecycleAdapter;
-import com.pizza4u.adapters.EmpOrderRecycleAdapter;
-import com.pizza4u.models.OrderModel;
-import com.pizza4u.models.UserModel;
+import com.pizza4u.adapters.BranchRecyclerAdapter;
+import com.pizza4u.adapters.PizzasRecycleAdapter;
+import com.pizza4u.models.BranchModel;
+import com.pizza4u.models.PizzaModel;
 
 import java.util.ArrayList;
 
-public class CheckOrdersActivity extends AppCompatActivity {
+public class BranchListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    ArrayList<OrderModel> orderModelArrayList;
-    EmpOrderRecycleAdapter ordersRecycleAdapter;
+    ArrayList<BranchModel> branchModelArrayList;
+    BranchRecyclerAdapter branchRecycleAdapter;
     FirebaseFirestore db =FirebaseFirestore.getInstance();
+    Button btnAddBranch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_check_orders);
+        setContentView(R.layout.activity_branch_list);
 
-        recyclerView = findViewById(R.id.recycler_orders_employee);
+        recyclerView = findViewById(R.id.recycler_branches);
+        btnAddBranch = findViewById(R.id.btn_add_branch);
 
-        orderModelArrayList=new ArrayList<>();
 
-        db.collection("orders")
+        branchModelArrayList=new ArrayList<>();
+
+        db.collection("branch")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @SuppressLint("NotifyDataSetChanged")
@@ -53,15 +57,14 @@ public class CheckOrdersActivity extends AppCompatActivity {
                                     String documentid = document.getId();
                                     // Log.d("Email", email);
 
-                                    OrderModel orderModel = document.toObject(OrderModel.class);
-                                    orderModelArrayList.add(orderModel);
-                                    ordersRecycleAdapter = new EmpOrderRecycleAdapter(CheckOrdersActivity.this, orderModelArrayList);
-                                    ordersRecycleAdapter.notifyDataSetChanged();
-
+                                    BranchModel branchModel = document.toObject(BranchModel.class);
+                                    branchModelArrayList.add(branchModel);
+                                    branchRecycleAdapter=new BranchRecyclerAdapter(BranchListActivity.this,branchModelArrayList);
+                                    branchRecycleAdapter.notifyDataSetChanged();
                                 }
-                                if(!orderModelArrayList.isEmpty()){
-                                    recyclerView.setAdapter(ordersRecycleAdapter);
-                                    recyclerView.setLayoutManager(new LinearLayoutManager(CheckOrdersActivity.this));
+                                if(!branchModelArrayList.isEmpty()){
+                                    recyclerView.setAdapter(branchRecycleAdapter);
+                                    recyclerView.setLayoutManager(new LinearLayoutManager(BranchListActivity.this));
                                 }else {
                                     recyclerView.setVisibility(View.GONE);
                                 }
@@ -69,6 +72,14 @@ public class CheckOrdersActivity extends AppCompatActivity {
                     }
 
                 });
+
+        btnAddBranch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BranchListActivity.this , AddBranchActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

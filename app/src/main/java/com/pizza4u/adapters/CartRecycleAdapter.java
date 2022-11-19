@@ -28,6 +28,7 @@ public class CartRecycleAdapter extends RecyclerView.Adapter<CartRecycleAdapter.
     public List<CartItemModel> cartItemModelList;
     public int position;
     public TextView txtTot;
+    public float tot=0;
 
 
     public CartRecycleAdapter(Context mContext, List<CartItemModel> cartItemModelList,TextView txtTot) {
@@ -54,12 +55,48 @@ public class CartRecycleAdapter extends RecyclerView.Adapter<CartRecycleAdapter.
         holder.initPrice=cartItemModelList.get(position).getSubTotal();
         holder.txtSize.setText(cartItemModelList.get(position).getSize());
         Picasso.get().load(cartItemModelList.get(position).getPhoto_url()).into(holder.image);
+        tot+=parseFloat(holder.txtPrice.getText().toString());
+        txtTot.setText(String.valueOf(tot));
 
         cartItemModelList.get(position).setCount(Integer.parseInt(holder.txtCount.getText().toString()));
         cartItemModelList.get(position).setSubTotal(parseFloat(holder.txtPrice.getText().toString()));
 
-
-    }
+        holder.cartItemLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tot+=parseFloat(holder.txtPrice.getText().toString())-cartItemModelList.get(position).getSubTotal();
+                txtTot.setText(String.valueOf(tot));
+                cartItemModelList.get(position).setSubTotal(parseFloat(holder.txtPrice.getText().toString()));
+            }
+        });
+//        holder.btnplus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                int count = Integer.parseInt(holder.txtCount.getText().toString());
+//                count++;
+//                holder.txtCount.setText(String.valueOf(count));
+//                float sub = count*holder.initPrice;
+//                holder.txtPrice.setText(Float.toString(sub));
+//                tot+=parseFloat(holder.txtPrice.getText().toString())-holder.initPrice;
+//                txtTot.setText(String.valueOf(tot));
+//            }
+//        });
+//
+//        holder.btnplus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                int count = Integer.parseInt(holder.txtCount.getText().toString());
+//                if(count>=2){
+//                    count--;
+//                    holder.txtCount.setText(String.valueOf(count));
+//                    float sub = count*holder.initPrice;
+//                    holder.txtPrice.setText(Float.toString(sub));
+//                    tot+=parseFloat(holder.txtPrice.getText().toString())-holder.initPrice;
+//                    txtTot.setText(String.valueOf(tot));
+//                }
+//            }
+//        });
+  }
 
 
     @Override
@@ -109,7 +146,6 @@ public class CartRecycleAdapter extends RecyclerView.Adapter<CartRecycleAdapter.
                         txtCount.setText(String.valueOf(count));
                         float sub = count*initPrice;
                         txtPrice.setText(Float.toString(sub));
-
                     }
                 }
             });

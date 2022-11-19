@@ -1,8 +1,12 @@
 package com.pizza4u.fragments;
 
 import static java.lang.Double.parseDouble;
+import static java.lang.Float.parseFloat;
 
 import android.annotation.SuppressLint;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,17 +44,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
 
-public class CusCartFragment extends Fragment {
+public class CusCartFragment extends Fragment implements LocationListener {
 
     private View view;
     private RecyclerView recyclerView;
     private CartRecycleAdapter cartRecycleAdapter;
-    private TextView txttot;
+    private TextView txttot,txtlocation;
     double tot=0.00;
     private Button btnOrder;
+    private ImageButton btnGetLocation;
     ArrayList<OrderModel> orderModelArrayList;
     ArrayList<CartItemModel> cartItemModelArrayList;
-    String longitude,latitude;
+    Double longitude,latitude;
     Calendar c = Calendar.getInstance();
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat dateformat = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss aa");
@@ -77,6 +83,11 @@ public class CusCartFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        longitude = location.getLatitude();
+        latitude = location.getLongitude();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -120,6 +131,8 @@ public class CusCartFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_cart);
         txttot = view.findViewById(R.id.textTotal);
         btnOrder=view.findViewById(R.id.btnPlaceOrder);
+        btnGetLocation=view.findViewById(R.id.btnChangeLocation);
+        txtlocation=view.findViewById(R.id.txt_location_order);
 
         cartItemModelArrayList=new ArrayList<>();
         recyclerView.setAdapter(cartRecycleAdapter);
@@ -162,6 +175,14 @@ public class CusCartFragment extends Fragment {
 
 
 
+        btnGetLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // txtlocation.setText(String.valueOf(longitude)+","+String.valueOf(latitude));
+                txtlocation.setText("longitude,latitude");
+            }
+        });
+
         txttot.setText(Double.toString(tot));
 
         btnOrder.setOnClickListener(new View.OnClickListener() {
@@ -170,7 +191,30 @@ public class CusCartFragment extends Fragment {
                  CollectionReference dbCartItems = db.collection("cart-items");
                  CollectionReference dbOrderItems = db.collection("order-items");
 
-                int orderID;
+                orderModelArrayList=new ArrayList<>();
+                dbOrderItems
+                        .whereEqualTo("userEmail",userModel.getEmail() )
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @SuppressLint("NotifyDataSetChanged")
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    if(!task.getResult().isEmpty()) {
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            // Log.d(TAG, document.getId() + " => " + document.getData());
+                                            String documentid = document.getId();
+                                            // Log.d("Email", email);
+
+                                            OrderModel orderModel =document.toObject(OrderModel.class);
+                                            orderModelArrayList.add(orderModel);
+                                        }
+                                    }}
+                            }
+
+                        });
+
+                int orderID=0;
 
                  if(orderModelArrayList.isEmpty()){
                      orderID= 1;
@@ -180,7 +224,7 @@ public class CusCartFragment extends Fragment {
 
 
                  //add to orders
-                  OrderModel orderModel = new OrderModel(userModel.getDocID(),Integer.toString(orderID),"Queued",tot,dateformat.format(c.getTime()) ,longitude,latitude);
+                OrderModel orderModel = new OrderModel(userModel.getDocID(),Integer.toString(orderID),"Queued",parseDouble(txttot.getText().toString()),dateformat.format(c.getTime()) ,"longitude","latitude");
                   dbOrderItems.add(orderModel).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
@@ -214,4 +258,5 @@ public class CusCartFragment extends Fragment {
         });
 
     }
+
 }
