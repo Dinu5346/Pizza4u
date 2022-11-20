@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,21 +88,22 @@ public class CusOrdersFragment extends Fragment {
 
                                     OrderModel orderModel = document.toObject(OrderModel.class);
                                     orderModelArrayList.add(orderModel);
+                                    ordersRecycleAdapter = new CusOrdersRecycleAdapter(getContext(), orderModelArrayList,userModel.getEmail());
                                     ordersRecycleAdapter.notifyDataSetChanged();
 
                                 }
-                            }}
+                                if(!orderModelArrayList.isEmpty()){
+                                    recyclerView.setAdapter(ordersRecycleAdapter);
+                                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                                }else{
+                                    recyclerView.setVisibility(View.GONE);
+                                }
+                             }
+
+                        }
                     }
 
                 });
-
-        ordersRecycleAdapter = new CusOrdersRecycleAdapter(getContext(), orderModelArrayList);
-        if(!orderModelArrayList.isEmpty()){
-            recyclerView.setAdapter(ordersRecycleAdapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        }else{
-            recyclerView.setVisibility(View.GONE);
-        }
 
     }
 

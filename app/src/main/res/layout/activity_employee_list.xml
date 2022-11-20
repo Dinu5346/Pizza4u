@@ -6,14 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".activities.EmployeeListActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/layout_headerbar" />
-
+        <include
+            android:id="@+id/include"
+            layout="@layout/layout_headerbar" />
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="690dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include">
 
@@ -22,10 +25,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:background="#ECEAEA"
+                android:fadingEdgeLength="5dp"
                 android:layout_marginTop="10dp"
-                android:text="EMPLOYEES" />
+                android:layout_marginBottom="10dp"
+                android:fontFamily="sans-serif-condensed-light"
+                android:padding="3dp"
+                android:text="EMPLOYEES"
+                android:textSize="15dp"
+                android:layout_gravity="center_horizontal"/>
           <LinearLayout
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
@@ -47,19 +58,20 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_employees"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp">
+                android:layout_height="wrap_content">
 
             </androidx.recyclerview.widget.RecyclerView>
 
-            <Button
-                android:id="@+id/btn_add_emp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Add New Employee" />
-
         </LinearLayout>
     </ScrollView>
-
+        <Button
+            android:id="@+id/btn_add_emp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add New Employee"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@color/colorPrimaryVariant"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

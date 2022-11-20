@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ public class CusCartFragment extends Fragment implements LocationListener {
     private CartRecycleAdapter cartRecycleAdapter;
     private TextView txttot,txtlocation;
     double tot=0.00;
+    int orderID=0;
     private Button btnOrder;
     private ImageButton btnGetLocation;
     ArrayList<OrderModel> orderModelArrayList;
@@ -132,7 +134,7 @@ public class CusCartFragment extends Fragment implements LocationListener {
         txttot = view.findViewById(R.id.textTotal);
         btnOrder=view.findViewById(R.id.btnPlaceOrder);
         btnGetLocation=view.findViewById(R.id.btnChangeLocation);
-        txtlocation=view.findViewById(R.id.txt_location_order);
+        txtlocation=view.findViewById(R.id.maps_orderLocation);
 
         cartItemModelArrayList=new ArrayList<>();
         recyclerView.setAdapter(cartRecycleAdapter);
@@ -180,6 +182,7 @@ public class CusCartFragment extends Fragment implements LocationListener {
             public void onClick(View view) {
                // txtlocation.setText(String.valueOf(longitude)+","+String.valueOf(latitude));
                 txtlocation.setText("longitude,latitude");
+                Log.d("location",String.valueOf(longitude));
             }
         });
 
@@ -190,9 +193,11 @@ public class CusCartFragment extends Fragment implements LocationListener {
             public void onClick(View view) {
                  CollectionReference dbCartItems = db.collection("cart-items");
                  CollectionReference dbOrderItems = db.collection("order-items");
+                 CollectionReference dbOrders = db.collection("orders");
+                 DocumentReference docOrder = dbOrders.document();
 
                 orderModelArrayList=new ArrayList<>();
-                dbOrderItems
+                dbOrders
                         .whereEqualTo("userEmail",userModel.getEmail() )
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -209,51 +214,91 @@ public class CusCartFragment extends Fragment implements LocationListener {
                                             OrderModel orderModel =document.toObject(OrderModel.class);
                                             orderModelArrayList.add(orderModel);
                                         }
-                                    }}
+                                        Log.d("orderid",String.valueOf(orderModelArrayList.size()));
+                                        if(orderModelArrayList.isEmpty()){
+                                            orderID= 1;
+                                        }else {
+                                            orderID=(int) orderModelArrayList.size()+1;
+                                        }
+
+                                        //add to orders
+                                        OrderModel orderModel = new OrderModel(userModel.getEmail(),Integer.toString(orderID),"Queued",parseDouble(txttot.getText().toString()),dateformat.format(c.getTime()) ,"longitude","latitude",docOrder.getId());
+                                        docOrder.set(orderModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Toast.makeText(getContext(), "Your order has been added to Firebase Firestore Orders", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(getContext(), "Failed to add your order to Firebase Firestore Orders", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+                                        //add to order items and delete from cart
+                                        for (CartItemModel item : cartItemModelArrayList) {
+                                            OrderItemModel orderItemModel = new OrderItemModel(userModel.getEmail(),orderModel.getOrderId(),item.getPizzaName(),item.getCount(),item.getSubTotal(),item.getSize());
+                                            dbOrderItems.add(orderItemModel).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                @Override
+                                                public void onSuccess(DocumentReference documentReference) {
+                                                    Toast.makeText(getContext(), "Your order item has been added to Firebase Firestore Order Items", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(getContext(), "Failed to add your order item to Firebase Firestore Order Items", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                            dbCartItems.document(item.getDocId()).delete();
+//                    cartItemModelArrayList.remove(item);
+                                        }
+
+                                    }else {
+
+                                    Log.d("orderid",String.valueOf(orderModelArrayList.size()));
+                                    if(orderModelArrayList.isEmpty()){
+                                        orderID= 1;
+                                    }else {
+                                        orderID=(int) orderModelArrayList.size()+1;
+                                    }
+
+                                    //add to orders
+                                    OrderModel orderModel = new OrderModel(userModel.getEmail(),Integer.toString(orderID),"Queued",parseDouble(txttot.getText().toString()),dateformat.format(c.getTime()) ,"longitude","latitude",docOrder.getId());
+                                    docOrder.set(orderModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(getContext(), "Your order has been added to Firebase Firestore Orders", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(getContext(), "Failed to add your order to Firebase Firestore Orders", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+
+                                    //add to order items and delete from cart
+                                    for (CartItemModel item : cartItemModelArrayList) {
+                                        OrderItemModel orderItemModel = new OrderItemModel(userModel.getEmail(),orderModel.getOrderId(),item.getPizzaName(),item.getCount(),item.getSubTotal(),item.getSize());
+                                        dbOrderItems.add(orderItemModel).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                            @Override
+                                            public void onSuccess(DocumentReference documentReference) {
+                                                Toast.makeText(getContext(), "Your order item has been added to Firebase Firestore Order Items", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(getContext(), "Failed to add your order item to Firebase Firestore Order Items", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                        dbCartItems.document(item.getDocId()).delete();
+//                    cartItemModelArrayList.remove(item);
+                                    }
+
+                                }}
                             }
 
                         });
 
-                int orderID=0;
-
-                 if(orderModelArrayList.isEmpty()){
-                     orderID= 1;
-                 }else {
-                     orderID=(int) orderModelArrayList.size()+2;
-                 }
-
-
-                 //add to orders
-                OrderModel orderModel = new OrderModel(userModel.getDocID(),Integer.toString(orderID),"Queued",parseDouble(txttot.getText().toString()),dateformat.format(c.getTime()) ,"longitude","latitude");
-                  dbOrderItems.add(orderModel).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(getContext(), "Your order has been added to Firebase Firestore Orders", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(), "Failed to add your order to Firebase Firestore Orders", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                //add to order items and delete from cart
-                for (CartItemModel item : cartItemModelArrayList) {
-                    OrderItemModel orderItemModel = new OrderItemModel(userModel.getDocID(),orderModel.getOrderId(),item.getPizzaName(),item.getCount(),item.getSubTotal(),item.getSize());
-                    dbOrderItems.add(orderItemModel).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                              Toast.makeText(getContext(), "Your order item has been added to Firebase Firestore Order Items", Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                              Toast.makeText(getContext(), "Failed to add your order item to Firebase Firestore Order Items", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    dbCartItems.document(item.getDocId()).delete();
-                    cartItemModelArrayList.remove(item);
-                }
             }
         });
 

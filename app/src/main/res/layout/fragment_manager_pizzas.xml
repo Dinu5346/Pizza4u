@@ -5,9 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ManagerPizzasFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="635dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -15,27 +20,36 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:background="#ECEAEA"
+                android:fadingEdgeLength="5dp"
                 android:layout_marginTop="10dp"
-                android:text="PIZZAS" />
+                android:layout_marginBottom="10dp"
+                android:fontFamily="sans-serif-condensed-light"
+                android:padding="3dp"
+                android:text="PIZZAS"
+                android:textSize="15dp"
+                android:layout_gravity="center_horizontal"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_pizzas_manager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp">
+                android:layout_height="wrap_content">
 
             </androidx.recyclerview.widget.RecyclerView>
 
-            <Button
-                android:id="@+id/btn_add_pizza"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Add Pizza" />
-
         </LinearLayout>
     </ScrollView>
-
+        <Button
+            android:id="@+id/btn_add_pizza"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryVariant"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="Add New Pizza" />
+    </LinearLayout>
 
 </FrameLayout>

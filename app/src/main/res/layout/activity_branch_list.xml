@@ -6,13 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".activities.BranchListActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <include
         android:id="@+id/include"
         layout="@layout/layout_headerbar" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="690dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include">
 
@@ -22,26 +31,37 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:background="#ECEAEA"
+                android:fadingEdgeLength="5dp"
                 android:layout_marginTop="10dp"
-                android:text="BRANCHES" />
+                android:layout_marginBottom="10dp"
+                android:fontFamily="sans-serif-condensed-light"
+                android:padding="3dp"
+                android:text="BRANCHES"
+                android:textSize="15dp"
+                android:layout_gravity="center_horizontal"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_branches"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp">
+                android:layout_marginTop="10dp">
 
             </androidx.recyclerview.widget.RecyclerView>
 
-            <Button
-                android:id="@+id/btn_add_branch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Add New Branch" />
-
         </LinearLayout>
     </ScrollView>
-
+    <Button
+        android:id="@+id/btn_add_branch"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@color/colorPrimaryVariant"
+        android:text="Add New Pizza Type" />
+    </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

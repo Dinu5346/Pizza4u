@@ -104,7 +104,7 @@ public class AddPizzaActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(image != null || selectedImage != null) {
                     StorageReference storageRef = storage.getReference();
-                    StorageReference profilepicRef = storageRef.child(txtPTname.getText().toString().trim() + "/pizza.jpg");
+                    StorageReference profilepicRef = storageRef.child(txtPTname.getText().toString().trim()+("/"+txtPname.getText().toString().trim()) + "/pizza.jpg");
 
                     if(image != null) {
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();

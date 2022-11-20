@@ -42,7 +42,7 @@ public class PizzasRecycleAdapter extends RecyclerView.Adapter<PizzasRecycleAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PizzasViewHolder pholder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull PizzasRecycleAdapter.PizzasViewHolder pholder, @SuppressLint("RecyclerView") int position) {
 
         pholder.txtName.setText(pizzaModelList.get(position).getName());
         pholder.txtDescription.setText(pizzaModelList.get(position).getDescription());

@@ -1,6 +1,7 @@
 package com.pizza4u.adapters;
 
 import static java.lang.Float.parseFloat;
+import static java.lang.Integer.parseInt;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -58,7 +59,7 @@ public class CartRecycleAdapter extends RecyclerView.Adapter<CartRecycleAdapter.
         tot+=parseFloat(holder.txtPrice.getText().toString());
         txtTot.setText(String.valueOf(tot));
 
-        cartItemModelList.get(position).setCount(Integer.parseInt(holder.txtCount.getText().toString()));
+        cartItemModelList.get(position).setCount(parseInt(holder.txtCount.getText().toString()));
         cartItemModelList.get(position).setSubTotal(parseFloat(holder.txtPrice.getText().toString()));
 
         holder.cartItemLayout.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +68,7 @@ public class CartRecycleAdapter extends RecyclerView.Adapter<CartRecycleAdapter.
                 tot+=parseFloat(holder.txtPrice.getText().toString())-cartItemModelList.get(position).getSubTotal();
                 txtTot.setText(String.valueOf(tot));
                 cartItemModelList.get(position).setSubTotal(parseFloat(holder.txtPrice.getText().toString()));
+                cartItemModelList.get(position).setCount(parseInt(holder.txtCount.getText().toString()));
             }
         });
 //        holder.btnplus.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +130,7 @@ public class CartRecycleAdapter extends RecyclerView.Adapter<CartRecycleAdapter.
                 @SuppressLint("SetTextI18n")
                 @Override
                 public void onClick(View view) {
-                    int count = Integer.parseInt(txtCount.getText().toString());
+                    int count = parseInt(txtCount.getText().toString());
                     count++;
                     txtCount.setText(String.valueOf(count));
                     float sub = count*initPrice;
@@ -140,7 +142,7 @@ public class CartRecycleAdapter extends RecyclerView.Adapter<CartRecycleAdapter.
                 @SuppressLint("SetTextI18n")
                 @Override
                 public void onClick(View view) {
-                    int count = Integer.parseInt(txtCount.getText().toString());
+                    int count = parseInt(txtCount.getText().toString());
                     if(count>=2){
                         count--;
                         txtCount.setText(String.valueOf(count));

@@ -111,9 +111,6 @@ public class ManagerPTypesRecycleAdapter extends RecyclerView.Adapter<ManagerPTy
                         }
                     });
 
-
-
-
             }
         });
 
