@@ -96,7 +96,6 @@
         android:gravity="center"
         android:text="Size          :"
         android:textSize="17dp"
-        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/spinner_p_size"
         app:layout_constraintHorizontal_bias="1.0"
@@ -107,19 +106,18 @@
     <Button
         android:id="@+id/btn_addtoCart"
         android:layout_width="match_parent"
-        android:layout_height="41dp"
+        android:layout_height="48dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="121dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="134dp"
-        android:text="Add to Cart"
         android:background="@color/colorPrimaryVariant"
+        android:text="Add to Cart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_p_size"
-        app:layout_constraintVertical_bias="0.285"
-        />
+        app:layout_constraintVertical_bias="0.285" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
