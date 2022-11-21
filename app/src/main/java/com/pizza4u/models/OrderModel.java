@@ -8,13 +8,14 @@ public class OrderModel {
     String dateTime;
     String longitude;
     String latitude;
+    String address;
     String docId;
 
 
     public OrderModel() {
     }
 
-    public OrderModel(String userID,String orderId,String status, Double price, String date, String longitude, String latitude,String docId) {
+    public OrderModel(String userID,String orderId,String status, Double price, String date, String longitude, String latitude,String address,String docId) {
         this.userEmail =userID;
         this.orderId = orderId;
         this.status=status;
@@ -22,7 +23,16 @@ public class OrderModel {
         this.dateTime = date;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.address=address;
         this.docId=docId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getDocId() {
