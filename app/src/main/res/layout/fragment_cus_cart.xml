@@ -90,7 +90,6 @@
               android:layout_width="wrap_content"
               android:layout_height="match_parent" />
 
-
       </LinearLayout>
 
       <TextView
@@ -104,10 +103,10 @@
       <TextView
           android:id="@+id/orderLocation_address"
           android:layout_width="400dp"
+
           android:layout_height="50dp"
           android:layout_marginStart="5dp"
           android:contentDescription="@string/order_location" />
-
 
       <Button
           android:id="@+id/btnPlaceOrder"
