@@ -247,7 +247,7 @@ public class CusCartFragment extends Fragment implements LocationListener {
                                         }
 
                                         //add to orders
-                                        OrderModel orderModel = new OrderModel(userModel.getEmail(), Integer.toString(orderID), "Queued", parseDouble(txttot.getText().toString()), dateformat.format(c.getTime()), "longitude", "latitude", docOrder.getId());
+                                        OrderModel orderModel = new OrderModel(userModel.getEmail(), Integer.toString(orderID), "Queued", parseDouble(txttot.getText().toString()), dateformat.format(c.getTime()), String.valueOf(longitude), String.valueOf(latitude),txtAdrress.getText().toString(), docOrder.getId());
                                         docOrder.set(orderModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
@@ -288,7 +288,7 @@ public class CusCartFragment extends Fragment implements LocationListener {
                                         }
 
                                         //add to orders
-                                        OrderModel orderModel = new OrderModel(userModel.getEmail(), Integer.toString(orderID), "Queued", parseDouble(txttot.getText().toString()), dateformat.format(c.getTime()), String.valueOf(longitude), String.valueOf(latitude), docOrder.getId());
+                                        OrderModel orderModel = new OrderModel(userModel.getEmail(), Integer.toString(orderID), "Queued", parseDouble(txttot.getText().toString()), dateformat.format(c.getTime()), String.valueOf(longitude), String.valueOf(latitude),txtAdrress.getText().toString(), docOrder.getId());
                                         docOrder.set(orderModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {

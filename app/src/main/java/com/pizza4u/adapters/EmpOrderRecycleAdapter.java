@@ -57,7 +57,13 @@ public class EmpOrderRecycleAdapter extends RecyclerView.Adapter<EmpOrderRecycle
         holder.txtOrderid.setText(orderModelList.get(position).getOrderId());
         holder.txtPrice.setText(orderModelList.get(position).getTotal().toString());
         holder.txtDate.setText(orderModelList.get(position).getDateTime().toString());
-        holder.txtLocation.setText(orderModelList.get(position).getLatitude()+","+orderModelList.get(position).getLatitude());
+        holder.txtLocation.setText(
+                String.format(
+                        "%s,%s \n%s",
+                        orderModelList.get(position).getLatitude(),orderModelList.get(position).getLongitude(),
+                        orderModelList.get(position).getAddress()
+                ));
+
         int s = 0;
         switch(orderModelList.get(position).getStatus()){
             case "Queued" : s=0;
