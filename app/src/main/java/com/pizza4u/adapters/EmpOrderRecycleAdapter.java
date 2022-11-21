@@ -1,9 +1,12 @@
 package com.pizza4u.adapters;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,6 +88,13 @@ public class EmpOrderRecycleAdapter extends RecyclerView.Adapter<EmpOrderRecycle
             }
         });
 
+        holder.btnLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMap(orderModelList.get(position).getLatitude(),orderModelList.get(position).getLongitude(),orderModelList.get(position).getUserEmail());
+            }
+        });
+
         holder.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -148,6 +158,14 @@ public class EmpOrderRecycleAdapter extends RecyclerView.Adapter<EmpOrderRecycle
                 mContext.startActivity(intent);
             }
         });
+    }
+
+    private void openMap(String latitude, String longitude, String userEmail) {
+        String geoUri = "http://maps.google.com/maps?q=loc:" + latitude + "," + longitude + " (" + userEmail + ")";
+        Uri uri = Uri.parse(geoUri);
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
+        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+        mContext.startActivity(intent);
     }
 
     @Override

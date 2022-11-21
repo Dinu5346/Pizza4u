@@ -83,8 +83,8 @@ public class AddBranchActivity extends AppCompatActivity {
 
                 if(coordinates != null) {
                     String[] res = coordinates.split("[,]", 0);
-                    longitude = res[0].trim();
-                    latitude = res[1].trim();
+                    latitude = res[0].trim();
+                    longitude = res[1].trim();
                 }
 
 
