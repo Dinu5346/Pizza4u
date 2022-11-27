@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -34,6 +35,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.pizza4u.R;
+import com.pizza4u.fragments.ManagerPizzasFragment;
 import com.pizza4u.models.PizzaModel;
 import com.pizza4u.models.PizzaTypeModel;
 
@@ -234,7 +236,8 @@ public class AddPizzaActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which){
                             case DialogInterface.BUTTON_POSITIVE:
-                                //Yes button clicked
+                                Intent intent = new Intent(AddPizzaActivity.this, ManagerMenuActivity.class);
+                                startActivity(intent);
                                 finish();
                                 break;
                         }

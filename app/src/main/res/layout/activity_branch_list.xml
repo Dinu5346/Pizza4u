@@ -61,7 +61,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:background="@color/colorPrimaryVariant"
-        android:text="Add New Pizza Type" />
+        android:text="Add New Branch" />
     </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

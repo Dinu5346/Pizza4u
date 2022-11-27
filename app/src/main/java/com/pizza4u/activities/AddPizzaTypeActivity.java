@@ -33,6 +33,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.pizza4u.R;
+import com.pizza4u.fragments.ManagerPizzaTypesFragment;
+import com.pizza4u.fragments.ManagerPizzasFragment;
 import com.pizza4u.models.PizzaTypeModel;
 import com.pizza4u.models.UserModel;
 
@@ -228,7 +230,8 @@ public class AddPizzaTypeActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which){
                             case DialogInterface.BUTTON_POSITIVE:
-                                //Yes button clicked
+                                Intent intent = new Intent(AddPizzaTypeActivity.this, ManagerMenuActivity.class);
+                                startActivity(intent);
                                 finish();
                                 break;
                         }
