@@ -83,8 +83,8 @@ public class AddBranchActivity extends AppCompatActivity {
 
                 if(coordinates != null) {
                     String[] res = coordinates.split("[,]", 0);
-                    longitude = res[0].trim();
-                    latitude = res[1].trim();
+                    latitude = res[0].trim();
+                    longitude = res[1].trim();
                 }
 
 
@@ -111,7 +111,8 @@ public class AddBranchActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 switch (which){
                                     case DialogInterface.BUTTON_POSITIVE:
-                                        //Yes button clicked
+                                        Intent intent = new Intent(AddBranchActivity.this, BranchListActivity.class);
+                                        startActivity(intent);
                                         finish();
                                         break;
                                 }

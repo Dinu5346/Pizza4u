@@ -1,10 +1,14 @@
 package com.pizza4u.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,11 +40,26 @@ public class BranchRecyclerAdapter extends RecyclerView.Adapter<BranchRecyclerAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BranchViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BranchViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.txtBname.setText(branchModelList.get(position).getBranchname());
         holder.txtBid.setText(branchModelList.get(position).getBranchid());
         holder.txtlocation.setText(branchModelList.get(position).getLocationname());
 
+        holder.btnLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMap(branchModelList.get(position).getLatitude(),branchModelList.get(position).getLongitude(),branchModelList.get(position).getBranchname());
+            }
+        });
+
+    }
+
+    private void openMap(String latitude, String longitude, String branchName) {
+        String geoUri = "http://maps.google.com/maps?q=loc:" + latitude + "," + longitude + " (" + branchName + ")";
+        Uri uri = Uri.parse(geoUri);
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
+        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+        mContext.startActivity(intent);
     }
 
     @Override
@@ -50,7 +69,7 @@ public class BranchRecyclerAdapter extends RecyclerView.Adapter<BranchRecyclerAd
 
     public static class BranchViewHolder extends RecyclerView.ViewHolder{
         public TextView txtBid,txtBname,txtlocation;
-        public Button btnLocation;
+        public ImageButton btnLocation;
 
 
         public BranchViewHolder(@NonNull View itemView) {
@@ -59,7 +78,7 @@ public class BranchRecyclerAdapter extends RecyclerView.Adapter<BranchRecyclerAd
             txtBid=itemView.findViewById(R.id.txtbranchID);
             txtBname=itemView.findViewById(R.id.txtbranchName);
             txtlocation=itemView.findViewById(R.id.txtBlocation);
-            btnLocation=itemView.findViewById(R.id.btn_add_branch);
+            btnLocation=itemView.findViewById(R.id.btnBranchLocation);
         }
     }
 }
